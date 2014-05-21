@@ -1232,7 +1232,7 @@ function fix_utf8($value) {
         // Note: this duplicates min_fix_utf8() intentionally.
         static $buggyiconv = null;
         if ($buggyiconv === null) {
-            $buggyiconv = (!function_exists('iconv') or @iconv('UTF-8', 'UTF-8//IGNORE', '100'.chr(130).'€') !== '100€');
+            $buggyiconv = (!function_exists('iconv') or @iconv('UTF-8', 'UTF-8//IGNORE', '100'.chr(130).'â‚¬') !== '100â‚¬');
         }
 
         if ($buggyiconv) {
@@ -3626,7 +3626,7 @@ function fullname($user, $override=false) {
     // This regular expression replacement is to fix problems such as 'James () Kirk' Where 'Tiberius' (middlename) has not been
     // filled in by a user.
     // The special characters are Japanese brackets that are common enough to make allowances for them (not covered by :punct:).
-    $patterns[] = '/[[:punct:]「」]*EMPTY[[:punct:]「」]*/u';
+    $patterns[] = '/[[:punct:]ã€Œã€�]*EMPTY[[:punct:]ã€Œã€�]*/u';
     // This regular expression is to remove any double spaces in the display name.
     $patterns[] = '/\s{2,}/u';
     foreach ($patterns as $pattern) {
@@ -4006,7 +4006,14 @@ function create_user_record($username, $password, $auth = 'manual') {
             unset($newuser->email);
         }
     }
-
+    //Bath mod - if email exists in database use blank
+    if(isset($newuser->email)) {
+    	$dupe = $DB->get_record('user',array('email'=>$newuser->email));
+    	if(is_object($dupe) && $dupe->email == $newuser->email){
+    		$newuser->email = '';
+    	}
+    }
+    //End Bath mod
     if (!isset($newuser->city)) {
         $newuser->city = '';
     }
