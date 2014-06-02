@@ -40,8 +40,8 @@ class filter_libproxylinks extends moodle_text_filter {
 		} else {
 		    $newlink = $link;
 		}
-		//$newtext = str_replace($link, $newlink, $newtext);
-		$newtext = "<a href=\"$newlink\">$link</a>";
+		$newtext = str_replace($link, $newlink, $newtext);
+		//$newtext = "<a href=\"$newlink\">$link</a>";
 	   }
 	   return $newtext;
 	}
