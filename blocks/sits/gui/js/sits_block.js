@@ -449,11 +449,19 @@ sits_block.get_period_options = function () {
 	return html;
 };
 
-sits_block.get_acyear_options = function () {
+sits_block.get_acyear_options = function (isbackward) {
 	var currentDate = new Date();
-	var startDate =  currentDate.getFullYear() - 3; // Go only 3 years back
+	if(isbackward === true){
+		var startDate =  currentDate.getFullYear() - 3; // Go only 3 years back
+    var endDate = currentDate.getFullYear();
+	}
+	else{
+		var startDate =  currentDate.getFullYear(); // Go one year forward
+    var endDate = currentDate.getFullYear() + 1;
+	}
+	
 	var html = '';
-	for( i = startDate; i <= currentDate.getFullYear() ; i++ ){
+	for( i = startDate; i <= endDate ; i++ ){
 	    var startdate_short = i.toString().substring(3,4);
 	    var nextyear_short =  parseInt(startdate_short) + 1;
 	    var academic_year = i + "/" + nextyear_short;
@@ -1580,7 +1588,7 @@ sits_block.appendPeriod = function (periodXML, added) {
 		row.className = id;
 		YAHOO.util.Dom.setAttribute(row, 'id', 'period_new_' + sits_block.newPeriodCount);
 		periodOptions = sits_block.get_period_options();
-		acyearOptions = sits_block.get_acyear_options();
+		acyearOptions = sits_block.get_acyear_options(false);
 		remove = document.createElement('input');
 		YAHOO.util.Dom.setAttribute(remove, 'type', 'submit');
 		YAHOO.util.Dom.setAttribute(remove, 'value', 'Remove');
@@ -1769,7 +1777,7 @@ sits_block.appendNewMappingFormToPage = function (courseid) {
 	
 	date = new Date(),
 	periodOptions = sits_block.get_period_options(),
-	acyearOptions = sits_block.get_acyear_options(),
+	acyearOptions = sits_block.get_acyear_options(true),
 	yosOptions = sits_block.get_yos_options(),
 	year_options = sits_block.get_years(date),
 	month_options = sits_block.get_months(date),
