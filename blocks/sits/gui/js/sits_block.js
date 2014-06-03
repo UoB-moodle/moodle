@@ -460,8 +460,8 @@ sits_block.get_acyear_options = function () {
 	    var selected = '';
 	    if( i == currentDate.getFullYear()){
 	    	selected = 'selected ="selected"';
-	    	html += '<option value="'+academic_year + '" '+ selected + '>'+academic_year+'</option>';
 	    }
+	    html += '<option value="'+academic_year + '" '+ selected + '>'+academic_year+'</option>';
 	}
 	return html;
 };
