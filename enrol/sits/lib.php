@@ -535,7 +535,7 @@ sql;
     public function user_by_username($username){
     	GLOBAL $DB;
         //If the user isn't a user in Moodle, add them:
-       	$user = $DB->get_record('user', array('username' => $username));
+       	$user = $DB->get_record('user', array('username' => $username,'deleted' => 0));
         
         if(is_object($user)){
             return $user;
@@ -1373,11 +1373,14 @@ sql;
             $this->report->log_report(1, 'Failed to sync '  . $mapping->id . '; could not get course context');
             return false;
         }
-
-			$user = $DB->get_record('user_enrolments',array('id'=>$enrol_teacher->u_enrol_id),'userid' );
-			if(!empty($user)){
+			//$user = $DB->get_record('user_enrolments',array('id'=>$enrol_teacher->u_enrol_id),'userid' );
+			// SQL to get only users that have not been 'soft' deleted from Moodle database
+			$sql = "SELECT u.id FROM {user} u JOIN {user_enrolments} ue ON ue.userid = u.id WHERE u.deleted <> 1 AND u.id = :id  ";
+			$user = $DB->get_record_sql($sql,array('id' =>$enrol_teacher->u_enrol_id));
+			if($user && !empty($user)){
 				$timestart = $timeend = 0; //Unlimited
-				//Dont need to check if user already exists, as enrol_user does that for you.
+				// Check if user exists as Moodle's enrol_user stalls the script completely
+				
 				try{
 					echo  "\n *****Try Enrolling teacher :". $user->userid ." as manual enrolment on course:".$mapping->courseid." ***** \n";
 					$enrol_manual->enrol_user($manual_enrol_instance, $user->userid, $enrol_teacher->roleid, $timestart, $timeend);
@@ -1388,6 +1391,9 @@ sql;
 					$converted = false;
 				}
 			}
+			else{
+					$converted = false;
+				}
 			
 		return $converted;
 			 
