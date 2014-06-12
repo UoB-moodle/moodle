@@ -187,7 +187,8 @@ class plagiarism_plugin_turnitin extends plagiarism_plugin {
             return false;
         }
 
-        $modulecontext = get_context_instance(CONTEXT_MODULE, $cmid);
+        //$modulecontext = get_context_instance(CONTEXT_MODULE, $cmid);
+        $modulecontext = context_module::instance($cmid);
 
         // Whether the user has permissions to see all items in the context of this module.
         $viewsimilarityscore = has_capability('plagiarism/turnitin:viewsimilarityscore', $modulecontext);
@@ -1130,7 +1131,7 @@ function turnitin_send_file($pid, $plagiarismsettings, $file) {
     if (empty($tiicid) or (empty($turnitin_assignid))) {
         //this file is being handled before the assignment was created in Turnitin - we need to create the assignment/course.
         //use create function instead
-        mtrace('assignment does not exist, Turnitin probably enabled during restore');
+        mtrace('assignment does not exist, Turnitin probably enabled during restore (CM ID: $cm->id)');
         $plagiarismvalues = $DB->get_records_menu('plagiarism_turnitin_config', array('cm'=>$cm->id), '', 'name,value');
         $eventdata = new stdClass();
         $eventdata->courseid = $course->id;
@@ -1480,7 +1481,7 @@ function turnitin_create_assignment($plagiarismsettings, $plagiarismvalues, $eve
     $tiiclassid = get_config('plagiarism_turnitin_course', $course->id); // unique classid
     if ($tiiclassid) {
         $tii['cid'] = $tiiclassid;
-        mtrace('class already exists on Turnitin');
+        mtrace('class already exists on Turnitin (Course ID: $course->id)');
     } else {
         // create class on Turnitin
         $tii['utp'] = TURNITIN_INSTRUCTOR;
@@ -1635,7 +1636,7 @@ function turnitin_update_assignment($plagiarismsettings, $plagiarismvalues, $eve
     $tiiclassid = get_config('plagiarism_turnitin_course', $course->id); // unique classid
     if ($tiiclassid) {
         $tii['cid'] = $tiiclassid;
-        mtrace('class already exists on Turnitin');
+        mtrace('class already exists on Turnitin (Course ID: $course->id)');
     } else {
         // create class on Turnitin
         $tii['utp'] = TURNITIN_INSTRUCTOR;
