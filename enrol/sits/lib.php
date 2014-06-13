@@ -1375,8 +1375,8 @@ sql;
         }
 			//$user = $DB->get_record('user_enrolments',array('id'=>$enrol_teacher->u_enrol_id),'userid' );
 			// SQL to get only users that have not been 'soft' deleted from Moodle database
-			$sql = "SELECT u.id FROM {user} u JOIN {user_enrolments} ue ON ue.userid = u.id WHERE u.deleted <> 1 AND u.id = :id  ";
-			$user = $DB->get_record_sql($sql,array('id' =>$enrol_teacher->u_enrol_id));
+			$sql = "SELECT u.id FROM {user} u JOIN {user_enrolments} ue ON ue.userid = u.id WHERE u.deleted <> 1 AND ue.id = :ueid  ";
+			$user = $DB->get_record_sql($sql,array('ueid' =>$enrol_teacher->u_enrol_id));
 			if($user && !empty($user)){
 				$timestart = $timeend = 0; //Unlimited
 				// Check if user exists as Moodle's enrol_user stalls the script completely
