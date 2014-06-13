@@ -1320,7 +1320,7 @@ sql;
 					//Only Teachers
 					echo "\n Converting teacher to manual enrolment : Role assignment id : $enrol->ra_id \n";
 					if(!$this->convert_to_manual($enrol,$mapping)){
-						echo 'Could not convert user enrolment '.$enrol->u_enrol_id.' to Manual \n';
+						echo "Could not convert user enrolment ".$enrol->u_enrol_id." to Manual \n";
 						$this->report->log_report(1,'Could not convert user enrolment '.$enrol->u_enrol_id.' to Manual');
 					}
 				}
