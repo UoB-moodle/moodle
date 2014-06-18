@@ -82,7 +82,7 @@ if(true){ //access to insert here?>
             </div>
                 <div id = "categories_mapping" class="admin_box">
                 <div class = "admin_instruction">
-                    <p><a href="/blocks/sits/gui/views/categories.php">Categories Mapping</a></p>
+                    <p><a onClick = "window.open('/blocks/sits/gui/views/categories.php','','height=800,width=800,resizable=yes,scrollbars=yes')" href="#" >Categories Mapping</a></p>
                 </div>
             </div>  
             </div>
