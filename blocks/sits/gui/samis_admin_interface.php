@@ -80,12 +80,11 @@ if(true){ //access to insert here?>
                 <input type="submit" value = "Reset Full Sync Flag" onclick="sits_block.reset_sync_flag()">
                 </div>
             </div>
-               <!-- <div id = "categories_mapping" class="admin_box">
+                <div id = "categories_mapping" class="admin_box">
                 <div class = "admin_instruction">
-                    <p><b>Categories Mapping</b></p>
-                     
+                    <p><a href="/blocks/sits/gui/views/categories.php">Categories Mapping</a></p>
                 </div>
-            </div> -->
+            </div>  
             </div>
     </div>
     <!-- JS - to be called into <head> after dev - plays better with Firebug like this-->
