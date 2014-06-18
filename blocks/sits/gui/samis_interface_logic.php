@@ -39,7 +39,7 @@ elseif(isset($_REQUEST['tabgroup'])) //Brought to this page by either a tab swit
     $courseid = $_REQUEST['courseid'];
 }
 
-$context = get_context_instance(CONTEXT_COURSE, $courseid);
+$context = context_course::instance($courseid);
 
 
 if(has_capability('moodle/course:manageactivities', $context))
