@@ -39,14 +39,13 @@ echo $OUTPUT->header();?>
         <div id = "container">
             <div id = "period_container" class="admin_box">
                 <input type="text" name="courseid" style="display: none;" /> 
-                <b>BUCS Username of person to be added: </b><input type="text" name="bucsname"
+                <b>Bath username of person to be added: </b><input type="text" name="bucsname"
                 	id="bucs_id_input" value="" maxlength="12" size="12" /> 
                 <input type="submit" value="Add User" id="useradd_sub"
                 	onclick="sits_block.add_user()" />
                 <div class = "admin_instruction">
-                <p>This form is used to add a BUCS user to Moodle.<br/>  
-                BUCS Lite accounts are not held in SAMIS and therefore cannot be validated.<br/>
-                Please ensure such usernames are correct before adding them.<br/>
+                <p>This form can be used to add a Bath username to Moodle. <a target = "_blank" href="http://www.bath.ac.uk/bucs/tools/waaa/">Web Application Access Accounts (WAAA)</a> are not held in SAMIS and therefore cannot be validated. <br/>
+                Hence, please ensure such usernames are correct before adding them</p>
                 </div>  
             </div>
         </div>
