@@ -575,10 +575,6 @@ body#help .warning {display: none}
 
 optgroup > option {text-indent: 2em}
 option {padding-right: .3em;}
-.userenrolment .col_role .addrole , .userenrolment .col_group .addgroup {
-	background-color: #D1E0E7;
-	border: 1px solid #CAE6F3;
-}
 /* Custom CSS Settings
 -------------------------*/
 [[setting:customcss]]

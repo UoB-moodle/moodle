@@ -210,6 +210,13 @@ CONTENT ONLY - NO SIDE BLOCKS WHATSOEVER (Middle Column Only)
 	padding-left: 5px;
 	padding-right: 5px;
 }
+.userenrolment .col_role .addrole , .userenrolment .col_group .addgroup {
+	background-color: #D1E0E7;
+	border: 1px solid #CAE6F3;
+}
+.userenrolment .col_group .addgroup a img {
+vertical-align: baseline;
+}
 #page-enrol-users .enrol_user_buttons {float:right;}
 #page-enrol-users .enrol_user_buttons .singlebutton {margin-top: 2px; line-height: 2;}
 #page-enrol-users .enrol_user_buttons .enrolusersbutton {margin-left:1em;display:inline;}
