@@ -36,7 +36,7 @@ class filter_libproxylinks extends moodle_text_filter {
 		    $newlink = $link;
 		} else if (stripos($link, "http") !== false) {
 			//If the subject itself is a link, then preserve the old text but point to the new link
-		    $newlink = clean_param($libproxylink.urlencode(html_entity_decode($link)),PARAM_URL);
+		    $newlink = clean_param($libproxylink."".urlencode(html_entity_decode($link)),PARAM_URL);
 		} else {
 		    $newlink = $link;
 		}
