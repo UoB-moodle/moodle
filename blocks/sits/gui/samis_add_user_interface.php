@@ -27,7 +27,7 @@ require_login();
 //$PAGE->requires->js('/enrol/sits/js/sits_block.js', true); //commented for debug, stuck in manually, plays better with Firebug
 $PAGE->set_pagelayout('popup');
 $PAGE->requires->css('/blocks/sits/gui/css/samis_user_interface.css');
-
+$PAGE->set_url('/blocks/sits/gui/samis_add_user_interface.php',array('courseid'=> 1));
 $plugin = enrol_get_plugin('sits');
 $context = context_system::instance();
 $PAGE->set_context($context);
