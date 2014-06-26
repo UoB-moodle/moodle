@@ -3,7 +3,6 @@
 require('../../../../config.php');
 require_once("$CFG->dirroot/enrol/locallib.php");
 require_once("$CFG->dirroot/enrol/sits/users_forms.php");
-//require_once("$CFG->dirroot/enrol/renderer.php");
 require_once("$CFG->dirroot/enrol/sits/renderer.php");
 require_once("$CFG->dirroot/group/lib.php");
 
@@ -13,6 +12,7 @@ $filter  = optional_param('ifilter', 0, PARAM_INT);
 $search  = optional_param('search', '', PARAM_RAW);
 $role    = optional_param('role', 0, PARAM_INT);
 $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
+$context = context_course::instance($course->id);
 $context = get_context_instance(CONTEXT_COURSE, $course->id, MUST_EXIST);
 
 // When users reset the form, redirect back to first page without other params.
@@ -80,7 +80,7 @@ class sits_course_enrolment_manager extends course_enrolment_manager {
                 'picture'    => new user_picture($user),
                 'firstname'  => fullname($user, true),
                 'lastseen'   => $strnever,
-                'roles'      => $user->role,
+                'roles'      => $this->get_role($user->role,$user->id,$courseid),
                 'groups'     => array(),
                 'enrolments' => array()
 			);
@@ -91,6 +91,19 @@ class sits_course_enrolment_manager extends course_enrolment_manager {
 			$userdetails[$user->id] = $details;
 		}
 		return $userdetails;
+	}
+	function get_role($role,$userid,$courseid){
+		global $DB;
+		if(empty($role)){
+			$params = array($userid,$courseid);
+			$sql = "SELECT r.name FROM {role} r JOIN {role_assignments} ra ON r.id = ra.roleid AND ra.userid = ? JOIN {context} ct ON ct.id = ra.contextid AND ct.contextlevel = 50
+			JOIN {enrol} e ON e.courseid = ct.instanceid AND e.enrol = 'manual' WHERE e.courseid = ?";
+			$enrolmentrole = $DB->get_field_sql($sql,$params);
+			return $enrolmentrole;
+		}
+		else{
+			return $role;
+		}
 	}
 	function get_users($sort, $direction='ASC', $page=0, $perpage=25) {
 		global $DB;
