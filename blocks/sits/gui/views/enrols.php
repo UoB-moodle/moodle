@@ -13,7 +13,6 @@ $search  = optional_param('search', '', PARAM_RAW);
 $role    = optional_param('role', 0, PARAM_INT);
 $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
 $context = context_course::instance($course->id);
-$context = get_context_instance(CONTEXT_COURSE, $course->id, MUST_EXIST);
 
 // When users reset the form, redirect back to first page without other params.
 if (optional_param('resetbutton', '', PARAM_RAW) !== '') {
