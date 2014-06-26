@@ -29,7 +29,7 @@ $PAGE->set_pagelayout('popup');
 $PAGE->requires->css('/blocks/sits/gui/css/samis_user_interface.css');
 
 $plugin = enrol_get_plugin('sits');
-$context = context_system::instance(CONTEXT_SYSTEM);
+$context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_title(get_string('manage_mappings', 'enrol_sits'));
 $PAGE->set_heading('Add Bath Users to Moodle'); //Set to a space in order to display the logo in 'popup' layout. al412.
