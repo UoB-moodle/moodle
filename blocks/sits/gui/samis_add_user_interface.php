@@ -29,10 +29,10 @@ $PAGE->set_pagelayout('popup');
 $PAGE->requires->css('/blocks/sits/gui/css/samis_user_interface.css');
 
 $plugin = enrol_get_plugin('sits');
-$context = get_context_instance(CONTEXT_SYSTEM); //This can't be right, but it does work...need the context for this block?
+$context = context_system::instance(CONTEXT_SYSTEM);
 $PAGE->set_context($context);
 $PAGE->set_title(get_string('manage_mappings', 'enrol_sits'));
-$PAGE->set_heading('Add BUCS Users to Moodle'); //Set to a space in order to display the logo in 'popup' layout. al412.
+$PAGE->set_heading('Add Bath Users to Moodle'); //Set to a space in order to display the logo in 'popup' layout. al412.
 
 echo $OUTPUT->header();?>
 
@@ -45,7 +45,7 @@ echo $OUTPUT->header();?>
                 	onclick="sits_block.add_user()" />
                 <div class = "admin_instruction">
                 <p>This form can be used to add a Bath username to Moodle. <a target = "_blank" href="http://www.bath.ac.uk/bucs/tools/waaa/">Web Application Access Accounts (WAAA)</a> are not held in SAMIS and therefore cannot be validated. <br/>
-                Hence, please ensure such usernames are correct before adding them</p>
+                Therefore, please ensure such usernames are correct before adding them</p>
                 </div>  
             </div>
         </div>
