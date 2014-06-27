@@ -1887,7 +1887,7 @@ sql;
             }
             else{
 				//Logging mapping dates when removing enrols
-				$this->report->log_report(2, 'Mapping End Date : '.$mapping->end->format('Y-m-d H:i:s').', Mapping Start Date: '.$mapping->start->format('Y-m-d H:i:s').' , Current Date: '.$this->date->format('Y-m-d H:i:s'),'log',$mapping->cohort->sits_code);
+				//$this->report->log_report(2, 'Mapping End Date : '.$mapping->end->format('Y-m-d H:i:s').', Mapping Start Date: '.$mapping->start->format('Y-m-d H:i:s').' , Current Date: '.$this->date->format('Y-m-d H:i:s'),'log',$mapping->cohort->sits_code);
 			}
         }
         
@@ -1901,7 +1901,7 @@ sql;
             }
             else{
 				//Logging mapping dates when removing enrols
-				$this->report->log_report(2, 'Mapping End Date : '.$mapping->end->format('Y-m-d H:i:s').', Mapping Start Date: '.$mapping->start->format('Y-m-d H:i:s').' , Current Date: '.$this->date->format('Y-m-d H:i:s'),'log',$mapping->cohort->sits_code);
+				//$this->report->log_report(2, 'Mapping End Date : '.$mapping->end->format('Y-m-d H:i:s').', Mapping Start Date: '.$mapping->start->format('Y-m-d H:i:s').' , Current Date: '.$this->date->format('Y-m-d H:i:s'),'log',$mapping->cohort->sits_code);
 			}
         }
          
