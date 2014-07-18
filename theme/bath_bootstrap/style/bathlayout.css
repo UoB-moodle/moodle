@@ -235,3 +235,6 @@ vertical-align: baseline;
 #page-enrol-users #filterform #fgroup_id_buttons {margin-left:0.5em;}
 #page-enrol-users #filterform .fselect #id_filtergroup{width:10em;}
 #page-enrol-users .paging { clear: right; }
+.mform fieldset div {
+    margin: 0 10px 10px;
+}
