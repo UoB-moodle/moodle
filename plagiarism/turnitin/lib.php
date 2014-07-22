@@ -1481,7 +1481,7 @@ function turnitin_create_assignment($plagiarismsettings, $plagiarismvalues, $eve
     $tiiclassid = get_config('plagiarism_turnitin_course', $course->id); // unique classid
     if ($tiiclassid) {
         $tii['cid'] = $tiiclassid;
-        mtrace('class already exists on Turnitin (Course ID: $course->id)');
+        mtrace('class already exists on Turnitin (Course ID: '.$course->id.')');
     } else {
         // create class on Turnitin
         $tii['utp'] = TURNITIN_INSTRUCTOR;
