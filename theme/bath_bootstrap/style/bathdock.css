@@ -6,7 +6,7 @@ display: block;
 }
 body.has_dock #page{padding:0;}
 #dock {
-    width:3%;
+    width:37px;
     position:fixed;
     top:0px;
     left:2%;
