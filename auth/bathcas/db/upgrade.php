@@ -45,6 +45,9 @@ function xmldb_auth_bathcas_upgrade($oldversion) {
         if ($cas_language = get_config('auth/bathcas', 'language')) {
             set_config('language', 'CAS_Languages_'.ucfirst($cas_language), 'auth/bathcas');
         }
+        if (get_config('start_tls', 'auth/bathcas') === false) {
+        	set_config('start_tls', 0, 'auth/bathcas');
+        }
 
         upgrade_plugin_savepoint(true, 2013091700, 'auth', 'bathcas');
     }
