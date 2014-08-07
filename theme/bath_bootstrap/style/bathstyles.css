@@ -553,6 +553,10 @@ margin-left:0;
 .path-grade-report-grader h1{
 	clear:right;
 }
+/* Quiz Results */
+.pagelayout-report .no-overflow {
+overflow: auto;
+}
 /***
  * WARNING BAR 
  */
