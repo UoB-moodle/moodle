@@ -37,9 +37,6 @@ class block_gradeout extends block_base {
 		global $last_cron_time;
 		// these includes should point to the core classes in sits block (or local?)
 		require_once($CFG->dirroot . '/local/sits/lib/sits.final.class.php');
-
-		//require_once($CFG->dirroot . '/blocks/gradeout/dbobject.php');
-
 		$starttime = microtime();
 		$thisblock = $DB->get_record('block',array('name'=>'gradeout')); // 19 to 22 conversion - Hittesh - UoB
 		if($thisblock->cron != $CFG->block_gradeout_cron){
