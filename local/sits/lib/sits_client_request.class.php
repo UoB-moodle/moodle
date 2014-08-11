@@ -12,7 +12,6 @@ require_once('mapping.class.php');
 require_once('report.class.php');
 require_once('cohort.class.php');
 require_once('sits.final.class.php');
-require_once('report.class.php');
 
 GLOBAL $CFG;
 require_once($CFG->dirroot.'/group/lib.php');
