@@ -47,27 +47,24 @@ class block_gradeout extends block_base {
 			$thisblock->cron = $CFG->block_gradeout_cron;
 			$DB->update_record('block',$thisblock);
 		}
-
 		$this->report = new report(); // Added as it requires it - Hittesh
 		$sits = new sits($this->report); //Added as it requires it - Hittesh
+		if(!$sits){
+			//SITS is offline
+			 mtrace("Delaying exporting QA53 grades until SITS is back online");
+			 return false;
+		}
 		$cur_ac_year = $sits->get_current_academic_year();
 		$courses = explode(',', $CFG->block_gradeout_courses);
 		$last_cron_time = $DB->get_field('block', 'lastcron', array('name'=> 'gradeout')); // Hittesh Ahuja 19 to 22 conversion
 		mtrace('last run '.$last_cron_time);
 		mtrace('pass mark is '.$CFG->block_gradeout_passmark.'%');
-		/*
-		 $CFG->block_gradeout_mav_occur;
-		 $CFG->block_gradeout_period_code;
-		 $CFG->block_gradeout_map_code_suffix;
-		 $CFG->block_gradeout_mab_seq;
-		 */
 		foreach ($courses as $courseid){
 			$course = $DB->get_record('course',array( 'id'=>$courseid)); // 19 to 22 conversion - Hittesh
 			try{
 				//$sits_code, $period_code, $academic_year, $mav_occur, $map_code, $mab_seq
 				$cohort = new grade_module_cohort($course->idnumber, 'AY', $cur_ac_year,'A',$course->idnumber.'A','01');
 				$context = context_course::instance($courseid);
-				//$context = get_context_instance(CONTEXT_COURSE, $courseid);
 				$students = get_role_users(5,$context,false,'u.id, u.username');
 				is_array($students) ? $count = count($students) : $count = 0;
 				if (!$quizzes = get_coursemodules_in_course("quiz", $courseid)){
@@ -84,19 +81,19 @@ class block_gradeout extends block_base {
 				mtrace($e->getMessage().': idnumber is '.$quoteid.' in course '.$courseid);
 			}
 		}
-
+		
 		$difftime = microtime_diff($starttime, microtime());
 		mtrace(count($courses)." courses graded (took ".$difftime." seconds)");
 		return true;
 	}
 
 	function grade_quiz(&$sits,&$quiz,&$students,&$cohort){
+
 		global $CFG, $last_cron_time,$DB;
 		// this takes raw mark from all first successful attempts since last cron
 		$query = 'select userid, sumgrades, min(timefinish) as timefinish,timemodified from '.$CFG->prefix.'quiz_attempts where quiz = '.$quiz->instance.
 			' and sumgrades > '.$CFG->block_gradeout_passmark.
 			' and timefinish > '.$last_cron_time.' group by userid order by timefinish';
-			
         if($grades = $DB->get_recordset_sql($query)){
 			foreach ($grades as $grade){ // while($grade = rs_fetch_next_record($grades)){ //deprecated in 2
 				$grade->sas_agrg = 'P';
@@ -144,28 +141,19 @@ class block_gradeout extends block_base {
 			return $this->content;
 		}
 		global $CFG, $COURSE;
-
 		require_once($CFG->dirroot.'/lib/gradelib.php');
-
 		$context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 		$students = get_role_users(5 , $context);
 		$now = time();
-
 		$body_content='';
-		//$body_content.= '<pre>'.print_r($CFG,1).'</pre>';
-
-
 		$this->content =  new stdClass;
 		$this->content->text = $body_content;
-
-
 
 		if(isset($this->config->text)){
 			$this->content->footer = $this->config->text;
 		} else {
 			$this->content->footer = '';
 		}
-
 		return $this->content;
 	}
 }
