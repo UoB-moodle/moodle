@@ -54,8 +54,7 @@ echo'
 <div class="subcontent loginsub">
 <p>Whilst you have successfully logged into the system,<br />
 this account ('.$casUsername.') does not have permission to use Moodle.<br />
-If you think this is incorrect please contact the<br />
-<a href="http://www.bath.ac.uk/bucs/help/contact/">BUCS Service Desk</a>.</p>
+Please email e-Learning (e-learning@bath.ac.uk) for support.</p>
 </div>
 	';
 
