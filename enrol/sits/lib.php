@@ -564,13 +564,9 @@ sql;
     }
 	public function undelete_user($objUser){
 		global $DB;
-		if($objUser){
-			if($objUser->deleted == 1){
-				//Set it to 0
-				$DB->set_field('user', 'deleted', '0', array('id'=>$objUser->id));
-				return true;
-			}
-		}
+		//Set it to 0
+		$DB->set_field('user', 'deleted', '0', array('id'=>$objUser->id));
+		return true;
 	}
     public function add_cohort_members_to_group($cohort, $groupid){
 
