@@ -535,10 +535,14 @@ sql;
     public function user_by_username($username){
     	GLOBAL $DB;
         //If the user isn't a user in Moodle, add them:
-       	$user = $DB->get_record('user', array('username' => $username,'deleted' => 0));
-        
+       	$user = $DB->get_record('user', array('username' => $username));
+        //If user is deleted, un-delete it 
         if(is_object($user)){
-            return $user;
+        	if($user->deleted == 1){
+        		if($this->undelete_user($user)){
+        			return $user;
+        		}
+        	}
         }else{
 			// Condition to check for users with no info record 
 			//As users were being added without having any other info like fn,sn we want to skip those objects completely.
@@ -558,7 +562,16 @@ sql;
             }
         }
     }
-
+	public function undelete_user($objUser){
+		global $DB;
+		if($objUser){
+			if($objUser->deleted == 1){
+				//Set it to 0
+				$DB->set_field('user', 'deleted', '0', array('id'=>$objUser->id));
+				return true;
+			}
+		}
+	}
     public function add_cohort_members_to_group($cohort, $groupid){
 
         $return = true;
