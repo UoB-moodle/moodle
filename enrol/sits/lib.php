@@ -538,11 +538,10 @@ sql;
        	$user = $DB->get_record('user', array('username' => $username));
         //If user is deleted, un-delete it 
         if(is_object($user)){
-        	if($user->deleted == 1){
-        		if($this->undelete_user($user)){
-        			return $user;
-        		}
+        	if($user->deleted == '1'){
+        		$this->undelete_user($user);
         	}
+        	return $user;
         }else{
 			// Condition to check for users with no info record 
 			//As users were being added without having any other info like fn,sn we want to skip those objects completely.
