@@ -83,7 +83,7 @@ class mod_forum_mod_form extends moodleform_mod {
         $mform->addElement('select', 'forcesubscribe', get_string('subscriptionmode', 'forum'), $options);
         $mform->addHelpButton('forcesubscribe', 'subscriptionmode', 'forum');
         /* TRAC ticket to set default option to AUTO Hittesh */
-        $mform->setDefault('forcesubscribe',$options[FORUM_INITIALSUBSCRIBE]);
+        $mform->setDefault('forcesubscribe',FORUM_INITIALSUBSCRIBE);
 
         $options = array();
         $options[FORUM_TRACKING_OPTIONAL] = get_string('trackingoptional', 'forum');
