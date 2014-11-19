@@ -34,7 +34,7 @@ class block_bath_oue extends block_base
         $this->page->requires->js_init_call('M.OUE.init', array(
             $params
         ), false, $module);
-		$sotw_link = "https://www.bath.ac.uk/samis-sso/U_EVAL";
+		$sotw_link = "https://www.bath.ac.uk/samis-sso/";
 		$this->content = new stdClass;
 		$this->content->text = "<div  style=\"display:none;\" id=\"no_survey_results\">You have no unit evaluations pending</div>";
         $this->content->text .= "<div id=\"survey_loading\"></div>";
