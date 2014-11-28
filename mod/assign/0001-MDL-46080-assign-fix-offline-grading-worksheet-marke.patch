@@ -1,0 +1,30 @@
+From 15e7db4e1d0506e4c3155f282f11cd7f2d3ce79e Mon Sep 17 00:00:00 2001
+From: Jonathon Fowler <fowlerj@usq.edu.au>
+Date: Wed, 25 Jun 2014 12:14:31 +1000
+Subject: [PATCH] MDL-46080 assign: fix offline grading worksheet marker
+ column
+
+---
+ mod/assign/gradingtable.php |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/mod/assign/gradingtable.php b/mod/assign/gradingtable.php
+index 743f472..1453578 100644
+--- a/mod/assign/gradingtable.php
++++ b/mod/assign/gradingtable.php
+@@ -534,7 +534,11 @@ class assign_grading_table extends table_sql implements renderable {
+             return '';
+         }
+         if ($this->is_downloading()) {
+-            return $markers[$row->allocatedmarker];
++            if (isset($markers[$row->allocatedmarker])) {
++                return fullname($markers[$row->allocatedmarker]);
++            } else {
++                return '';
++            }
+         }
+ 
+         if ($this->quickgrading && has_capability('mod/assign:manageallocations', $this->assignment->get_context()) &&
+-- 
+1.7.9.5
+
